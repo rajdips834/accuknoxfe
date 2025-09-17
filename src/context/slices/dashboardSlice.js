@@ -22,23 +22,46 @@ const dashboardSlice = createSlice({
   reducers: {
     addWidgetToDashboard: (state, action) => {
       const { dashboardId, widgetId } = action.payload;
-      const dashboard = state.dashboards.find((d) => d.id === dashboardId);
-      if (dashboard) {
+      const dashboard = state.dashboards.find(
+        (d) => d.dashBoardId === dashboardId
+      );
+      if (dashboard && !dashboard.widgetIds.includes(widgetId)) {
         dashboard.widgetIds.push(widgetId);
       }
     },
     removeWidgetFromDashboard: (state, action) => {
       const { dashboardId, widgetId } = action.payload;
-      const dashboard = state.dashboards.find((d) => d.id === dashboardId);
+      const dashboard = state.dashboards.find(
+        (d) => d.dashBoardId === dashboardId
+      );
       if (dashboard) {
         dashboard.widgetIds = dashboard.widgetIds.filter(
           (id) => id !== widgetId
         );
       }
     },
+    toggleWidgetOnDashboard: (state, action) => {
+      const { dashboardId, widgetId } = action.payload;
+      const dashboard = state.dashboards.find(
+        (d) => d.dashBoardId === dashboardId
+      );
+      if (dashboard) {
+        if (dashboard.widgetIds.includes(widgetId)) {
+          dashboard.widgetIds = dashboard.widgetIds.filter(
+            (id) => id !== widgetId
+          );
+        } else {
+          dashboard.widgetIds.push(widgetId);
+        }
+      }
+    },
   },
 });
 
-export const { addWidgetToDashboard, removeWidgetFromDashboard } =
-  dashboardSlice.actions;
+export const {
+  addWidgetToDashboard,
+  removeWidgetFromDashboard,
+  toggleWidgetOnDashboard,
+} = dashboardSlice.actions;
+
 export default dashboardSlice.reducer;

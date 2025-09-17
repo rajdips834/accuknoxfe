@@ -114,7 +114,7 @@ const widgetSlice = createSlice({
   name: "widget",
   initialState,
   reducers: {
-    addWidget: (state, action) => {
+    addWidgetToDashBoard: (state, action) => {
       const { data, name } = action.payload;
       const newWidget = {
         data: data,
