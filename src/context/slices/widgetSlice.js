@@ -123,6 +123,10 @@ const widgetSlice = createSlice({
       };
       state.widgets.push(newWidget);
     },
+    addNewWidget: (state, action) => {
+      const { widget } = action.payload;
+      state.widgets.push(widget);
+    },
     removeWidget: (state, action) => {
       const { widgetId } = action.payload;
       state.widgets = state.widgets.filter((w) => w.widgetId !== widgetId);
@@ -130,5 +134,6 @@ const widgetSlice = createSlice({
   },
 });
 
-export const { addWidget } = widgetSlice.actions;
+export const { addWidget, addNewWidget, addWidgetToDashBoard } =
+  widgetSlice.actions;
 export default widgetSlice.reducer;

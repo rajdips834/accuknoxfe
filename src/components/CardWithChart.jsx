@@ -33,7 +33,7 @@ export default function CardWithChart({
   type = "pie",
   title = "Chart",
   data = [],
-  height = 260,
+  height = 440,
   legendPlacement = "right",
   colors = defaultColors,
 }) {

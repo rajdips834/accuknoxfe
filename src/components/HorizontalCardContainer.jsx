@@ -33,7 +33,7 @@ export default function HorizontalCardContainer({ Heading, datasets }) {
                     type={ds.type || "pie"} // "pie" or "bar"
                     title={ds.name}
                     data={ds.data}
-                    height={240}
+                    height={460}
                     legendPlacement="bottom"
                   />
                 )

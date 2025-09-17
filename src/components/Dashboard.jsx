@@ -16,6 +16,7 @@ import LoopIcon from "@mui/icons-material/Loop";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddWidgetModal from "./AddWidgetModal";
 import { useSelector } from "react-redux";
+import CreateWidgetModal from "./CreateWidgetModal";
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -135,7 +136,7 @@ const Dashboard = () => {
           >
             Add Widget
           </Button>
-          <Button>
+          <Button onClick={() => window.location.reload()}>
             <LoopIcon />
           </Button>
           <Button>
@@ -164,8 +165,8 @@ const Dashboard = () => {
       })}
 
       {/* Add Widget Drawer */}
-      <AddWidgetModal
-        isOpen={isModalOpen}
+      <CreateWidgetModal
+        open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         dashboards={dashboards}
         widgets={availableWidgets}
