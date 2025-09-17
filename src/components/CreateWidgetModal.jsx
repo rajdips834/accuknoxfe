@@ -1,5 +1,4 @@
-"use client";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -14,6 +13,7 @@ import {
 import { Plus, Trash2 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addNewWidget } from "../context/slices/widgetSlice";
+
 export default function CreateWidgetModal({ open, onClose }) {
   const dispatch = useDispatch();
   const [widget, setWidget] = useState({
@@ -53,6 +53,15 @@ export default function CreateWidgetModal({ open, onClose }) {
     console.log("Saving widget:", widget);
     dispatch(addNewWidget({ widget }));
     onClose();
+  };
+
+  // ✅ Validation logic
+  const isValidWidget = () => {
+    if (!widget.name.trim()) return false;
+    if (widget.data.length === 0) return false;
+    return widget.data.every(
+      (row) => row.name.trim() !== "" && row.value !== "" && !isNaN(row.value)
+    );
   };
 
   return (
@@ -156,7 +165,11 @@ export default function CreateWidgetModal({ open, onClose }) {
         <Button onClick={onClose} variant="outlined">
           Cancel
         </Button>
-        <Button onClick={handleSave} variant="contained">
+        <Button
+          onClick={handleSave}
+          variant="outlined"
+          disabled={!isValidWidget()}
+        >
           Save Widget
         </Button>
       </DialogActions>
